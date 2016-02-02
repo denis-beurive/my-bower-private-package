@@ -9,9 +9,9 @@ The process for creating a public package is identical for public and private pa
 What differs is that, instead of registering the package on a public server, we register it on our own private server (our instance of [private-bower](https://www.npmjs.com/package/private-bower)).
 
 To do that, we have to configure Bower so that it will use our private packages registering server, instead of the default one (https://bower.herokuapp.com). 
-The configuration is done through the Bower configuration file « bowerrc ». See the [specifications](http://bower.io/docs/config/) for this file.
+The configuration is done through the Bower configuration file « .bowerrc ». See the [specifications](http://bower.io/docs/config/) for this file.
 
-Assuming that our instance of private-bower is accessible via the URL: `http://bower-server.yourdomain:7777`, then your `bower.rc` file looks something like:
+Assuming that our instance of private-bower is accessible via the URL: `http://bower-server.yourdomain:7777`, then your `.bowerrc` file looks something like:
 
 	{
 		"analytics": false,
