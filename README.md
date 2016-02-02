@@ -32,3 +32,77 @@ This configuration file tells Bower:
 * Publish packages to our private Bower server.
 * Search for packages, first from our private Bower server, then from the default one (at `https://bower.herokuapp.com`).
 
+Registering the package:
+
+	bower register my-bower-private-package git://github.com/denis-beurive/my-bower-package.git
+
+Make sure bower can find the registered package:
+
+	bower search my-bower-private-package
+	bower lookup my-bower-private-package
+	bower info my-bower-private-package
+
+Please note the commands above should be executed from the local GIT repository, because the repository's directory contains the configuration file `.bowerrc`.
+
+Below, you can find my configuration file for "private-bower":
+
+	{
+	    "port": 6666,
+	    "registryFile": "/opt/bower/bowerRepository.json",
+	    "timeout": 144000,
+	    "public": {
+	        "disabled": false,
+	        "registry": "http://bower.herokuapp.com/packages/",
+	        "registryFile": "/opt/bower/bowerRepositoryPublic.json",
+	        "whitelist": [],
+	        "blacklist": []
+	    },
+	    "authentication": {
+	        "enabled": false,
+	        "key": "PASSWPRD"
+	    },
+	    "repositoryCache": {
+	        "cachePrivate": false,
+	        "git": {
+	            "enabled": false,
+	            "cacheDirectory": "/opt/bower/gitRepoCache",
+	            "host": "localhost",
+	            "port": 6789,
+	            "publicAccessURL" : null,
+	            "refreshTimeout": 10
+	        },
+	        "svn": {
+	            "enabled": false,
+	            "cacheDirectory": "/opt/bower/svnRepoCache",
+	            "host": "localhost",
+	            "port": 7891,
+	            "publicAccessURL" : null,
+	            "refreshTimeout": 10
+	        }
+	    },
+	    "proxySettings" : {
+	        "enabled": false,
+	        "host": "proxy",
+	        "username": "name",
+	        "password" : "pass",
+	        "port": 8080,
+	        "tunnel": false
+	    },
+	    "log4js" : {
+	        "enabled": true,
+	        "configPath" : "/opt/bower/log4js.conf.json"
+		}
+	}
+
+Please note that after the package `my-bower-private-package` has been registered, you find its reference within the file `bowerRepository.json` (property `registryFile`).
+
+	{
+	    "my-bower-private-package": {
+	        "name": "my-bower-private-package",
+	        "url": "git://github.com/denis-beurive/my-bower-package.git",
+	        "hits": 1
+	    }
+	}
+
+
+
