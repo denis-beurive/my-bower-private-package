@@ -22,7 +22,7 @@ Assuming that our instance of private-bower is accessible via the URL: `http://b
 			],
 			"register": "http://bower-server.yourdomain:7777",
 			"publish": "http://bower-server.yourdomain:7777"
-		}
+		},
 		"timeout": 300000
 	}
 

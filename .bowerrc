@@ -7,6 +7,6 @@
     ],
     "register": "http://bower-server.yourdomain:7777",
     "publish": "http://bower-server.yourdomain:7777"
-   }
+   },
   "timeout": 300000
 }
