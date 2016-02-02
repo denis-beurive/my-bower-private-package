@@ -1,0 +1,12 @@
+{
+  "analytics": false,
+  "registry": {
+    "search": [
+      "http://bower-server.yourdomain:7777",
+      "https://bower.herokuapp.com"
+    ],
+    "register": "http://bower-server.yourdomain:7777",
+    "publish": "http://bower-server.yourdomain:7777"
+   }
+  "timeout": 300000
+}

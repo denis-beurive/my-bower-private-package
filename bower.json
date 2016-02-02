@@ -1,0 +1,31 @@
+{
+  "name": "my-bower-private-package",
+  "version": "1.0.0",
+  "description": "This package is just a test.",
+  "main": [
+    "js/main.js",
+    "css/main.css"
+  ],
+  "dependencies": {
+    "angular": "1.4.7"
+  },
+  "devDependencies": {
+  },
+  "keywords": [
+    "test",
+    "package",
+    "bower"
+  ],
+  "authors": [
+    "Denis BEURIVE"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "tmp",
+    "bower_components",
+	"Makefile",
+	"git.sh",
+	"README.md"
+  ],
+  "private": false
+}
