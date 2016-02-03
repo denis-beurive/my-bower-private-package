@@ -1,10 +1,16 @@
-# my-bower-package
+# my-bower-private-package
 
 This repository contains a Bower package that I created in order to learn how to create private Bower packages using [private-bower](https://www.npmjs.com/package/private-bower).
 
-Bower is built on top of GIT. Packages’ sources must be kept within a GIT repository. It may be GitHub, or it may be another repository. For this example, I use a public GitHub repository since it is a handy solution… but everything on GitHub is publicly available. However, using a public repository on GitHub or a private GIT repository on a private server does not matter (passing from one to the other is just a matter of Bower’s configuration).
+**SVN NOTE**:
 
-The process for creating a public package is identical for public and private packages. SEE [https://github.com/denis-beurive/my-bower-package](https://github.com/denis-beurive/my-bower-package).
+> Please note that the repository's content has also been registered on SourceForge in order to illustrate the use of SVN to keep packages’ contents.
+> See [https://sourceforge.net/projects/my-bower-package/](https://sourceforge.net/projects/my-bower-package/).
+
+The process for creating package is identical for public and private packages.
+For GIT, see [https://github.com/denis-beurive/my-bower-package](https://github.com/denis-beurive/my-bower-package).
+
+For SVN, see the section "Using SVN".
 
 What differs is that, instead of registering the package on a public server, we register it on our own private server (our instance of [private-bower](https://www.npmjs.com/package/private-bower)).
 
@@ -104,5 +110,64 @@ Please note that after the package `my-bower-private-package` has been registere
 	    }
 	}
 
+# Using SVN
+
+* You create a JSON file called « [bower.json](http://sourceforge.net/p/my-bower-package/code/HEAD/tree/trunk/bower.json) » within the directory that contains all the files you want to package.
+  This file represents the package’s [specification](https://github.com/bower/spec/blob/master/json.md).
+* You create a repository on SourceForge that will contain the source of your package.
+* You commit all the packages’ files to the SourceForge repository.
+* You create a branch, under the directory "`tags`" (do not use any other directory name).
+  Make sure that this tag and the value of the property « `version` », within the package’s specification file « `bower.json` », are identical.
+* Then you can register the package to private-bower.
+
+
+Some useful commands:
+
+Creating the tag:
+
+**WARNING** In order to find a specific version of the package, Bower will _automatically_ take the "base URI" of the package and catenate the string "`tags/<version>`".
+
+	svn copy svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code/trunk \
+			 svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code/tags/1.0.0 \
+			 -m "Create the version 1.0.0"
+
+In case you made an error:
+
+	svn delete svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code/tags/1.0.0 -m "Ooops... error"
+
+Register the public package with Bower:
+
+	bower -V register my-bower-package-svn svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code
+
+Please note that we specify the « base URI » only. That is, we omit the last subdirectory « `trunk` ». Bower will look at :
+
+	<base URI>/tags/<version>
+
+The console's output:
+
+	$ bower -V register my-bower-package-svn svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code
+	bower my-bower-package-svn#*   resolve svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code#*
+	bower my-bower-package-svn#*    export 1.0.0
+	bower my-bower-package-svn#*  resolved svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code#1.0.0
+	? Registering a package will make it installable via the registry (http://beurive.ddns.net:6666), continue? Yes
+	bower my-bower-package-svn    register svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code
+	
+	Package my-bower-package-svn registered successfully!
+	All valid semver tags on svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code will be available as versions.
+	To publish a new version, just release a valid semver tag.
+	
+	Run bower info my-bower-package-svn to list the available versions.
+
+Test:
+
+	bower search my-bower-package-svn
+	bower lookup my-bower-package-svn
+	bower info my-bower-package-svn
+	bower install my-bower-package-svn
+
+**NOTE¨**:
+
+* You may need to configure your local SSH environment (since we used "svn+ssh").
+* In order to get it working, make sure to put the file "`.bowerrc`" into the current directory. 
 
 
