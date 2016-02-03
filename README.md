@@ -135,7 +135,7 @@ In case you made an error:
 
 	svn delete svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code/tags/1.0.0 -m "Ooops... error"
 
-Register the public package with Bower:
+Register the private package with Bower:
 
 	bower -V register my-bower-package-svn svn+ssh://denis-beurive@svn.code.sf.net/p/my-bower-package/code
 
